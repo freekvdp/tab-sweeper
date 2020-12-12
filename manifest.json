@@ -1,0 +1,21 @@
+{
+  "manifest_version": 2,
+  "name": "TabSweeper",
+  "version": "1.0",
+  "description": "Closes all tabs with given urls",
+  "icons": {
+    "64": "icons/magic-sweeper-64.png"
+  },
+  "permissions": [
+    "tabs",
+    "notifications"
+  ],
+  "browser_action": {
+    "default_icon": "icons/magic-sweeper-64.png"
+  },
+  "background": {
+    "scripts": [
+      "tab_sweeper.js"
+    ]
+  }
+}
