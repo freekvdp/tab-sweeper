@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <!-- <link rel="stylesheet" href="choose_beast.css"/> -->
+</head>
+
+<body>
+    <div id="popup-content">
+        <h1 id="popup-header">
+            Tab Sweeper
+        </h1>
+        <div id="sweeping-urls">
+
+        </div>
+        <div id="button-container">
+            <button id="sweep-button">Sweep</button>
+        </div>
+    </div>
+
+    <style>
+        body {
+            background: rgb(128, 128, 128);
+            min-width: 200px;
+            min-height: 200px;
+            font-size: 12px;
+        }
+
+        #popup-content {
+            display: flex;
+            flex-direction: column;
+            align-content: center;
+        }
+
+        #popup-header {
+            font-family: Helvetica Verdana, Geneva, Tahoma, sans-serif;
+            font-size: 1rem;
+            color: white;
+            text-align: center;
+        }
+    </style>
+
+    <script src="tab-sweeper.js"></script>
+    <script src="../scripts/main.js"></script>
+    <script src="../scripts/notifications.js"></script>
+</body>
+
+</html>

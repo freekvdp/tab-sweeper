@@ -11,11 +11,13 @@
     "notifications"
   ],
   "browser_action": {
-    "default_icon": "icons/magic-sweeper-64.png"
+    "default_title": "Tab Sweeper",
+    "default_icon": "icons/magic-sweeper-64.png",
+    "default_popup": "popup/tab-sweeper.html"
   },
   "background": {
     "scripts": [
-      "tab_sweeper.js"
+      "scripts/main.js"
     ]
   }
 }
