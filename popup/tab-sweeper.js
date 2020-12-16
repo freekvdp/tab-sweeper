@@ -1,9 +1,7 @@
-const onlyCurrentWindow = false;
-
 document.getElementById('sweep-button').addEventListener('click', activateSweeper);
 
 function activateSweeper() {
-    getWindowTabs(onlyCurrentWindow)
+    getWindowTabs()
         .then(tabs => tabs.map(tab => tab.id))
         .then(tabIds => closeTabs(tabIds))
         .then(sweepSuccess, sweepError);
