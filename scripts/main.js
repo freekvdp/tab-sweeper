@@ -1,18 +1,34 @@
-var currentWindowChecked = false;
+// document.addEventListener("DOMContentLoaded", onLoad);
 
-function getCurrentWindowChecked() {
-    const optionElement = document.getElementById('current-window-option');
+document.getElementById('current-window-option').addEventListener('change', (element) => {
+    storeCurrentWindowValue(element.target.checked).then(
+        updateBadge,
+        (e) => console.error('unable to store currentWindowChecked', e)
+    );
+});
 
-    if (document.readyState === 'complete' && !!optionElement) {
-        return optionElement.checked;
-    }
-    return false;
+getCurrentWindowValue()
+    .then(setCurrentWindowOption)
+    .then(updateBadge);
+
+
+function getCurrentWindowValue() {
+    return browser.storage.local.get({ currentWindowChecked: false })
+        .then(value => value.currentWindowChecked);
 }
 
-document.getElementById('current-window-option').addEventListener('change', function () {
-    currentWindowChecked = getCurrentWindowChecked();
-    updateBadge();
-});
+function storeCurrentWindowValue(value) {
+    return browser.storage.local.set({ currentWindowChecked: value });
+}
+
+function setCurrentWindowOption() {
+    console.log('set value',)
+    getCurrentWindowValue()
+        .then(optionValue => {
+            console.log('current value', optionValue);
+            document.getElementById('current-window-option').checked = optionValue;
+        });
+}
 
 function updateBadge() {
     getWindowTabs()
@@ -29,15 +45,21 @@ function getQueryTabUrls() {
 
 function getWindowTabs() {
     const queryTabUrls = getQueryTabUrls();
-
     let queryObj = { url: queryTabUrls }
-    if (currentWindowChecked) {
-        queryObj = { ...queryObj, currentWindow: true }
-    }
-    return browser.tabs.query(queryObj);
+
+    return getCurrentWindowValue()
+        .then(currentWindowChecked => {
+            if (currentWindowChecked) {
+                queryObj = { ...queryObj, currentWindow: true }
+            }
+            return browser.tabs.query(queryObj);
+        });
 }
 
-document.addEventListener("DOMContentLoaded", updateBadge);
 browser.tabs.onActivated.addListener(updateBadge);
 browser.tabs.onUpdated.addListener(updateBadge);
 browser.tabs.onRemoved.addListener(updateBadge);
+browser.windows.onFocusChanged.addListener((windowId) => {
+    console.log("Newly focused window: " + windowId);
+});
+browser.windows.onFocusChanged.addListener(updateBadge);
