@@ -1,5 +1,3 @@
-// document.addEventListener("DOMContentLoaded", onLoad);
-
 document.getElementById('current-window-option').addEventListener('change', (element) => {
     storeCurrentWindowValue(element.target.checked).then(
         updateBadge,
@@ -7,25 +5,11 @@ document.getElementById('current-window-option').addEventListener('change', (ele
     );
 });
 
-getCurrentWindowValue()
-    .then(setCurrentWindowOption)
-    .then(updateBadge);
-
-
-function getCurrentWindowValue() {
-    return browser.storage.local.get({ currentWindowChecked: false })
-        .then(value => value.currentWindowChecked);
-}
-
-function storeCurrentWindowValue(value) {
-    return browser.storage.local.set({ currentWindowChecked: value });
-}
+setCurrentWindowOption().then(updateBadge);  // set initial currentWindowValue
 
 function setCurrentWindowOption() {
-    console.log('set value',)
     getCurrentWindowValue()
         .then(optionValue => {
-            console.log('current value', optionValue);
             document.getElementById('current-window-option').checked = optionValue;
         });
 }
@@ -39,21 +23,18 @@ function updateBadge() {
         })
 }
 
-function getQueryTabUrls() {
-    return ['*://*.www.google.com/*', '*://*.stackoverflow.com/*'];
-}
-
 function getWindowTabs() {
-    const queryTabUrls = getQueryTabUrls();
-    let queryObj = { url: queryTabUrls }
+    const sweepTabPatterns = getSweepTabUrls()
+        .then(urls => urls.map(url => url.pattern))
 
-    return getCurrentWindowValue()
-        .then(currentWindowChecked => {
-            if (currentWindowChecked) {
+    return Promise.all([getSweepTabUrls(), getCurrentWindowValue()])
+        .then(([queryTabUrls, currentWindowActive]) => {
+            let queryObj = { url: queryTabUrls }
+            if (currentWindowActive) {
                 queryObj = { ...queryObj, currentWindow: true }
             }
             return browser.tabs.query(queryObj);
-        });
+        })
 }
 
 browser.tabs.onActivated.addListener(updateBadge);

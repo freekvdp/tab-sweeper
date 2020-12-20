@@ -15,5 +15,8 @@
     "default_title": "Tab Sweeper",
     "default_icon": "icons/magic-sweeper-64.png",
     "default_popup": "popup/tab-sweeper.html"
+  },
+  "background": {
+    "scripts": ["scripts/background.js"]
   }
 }
