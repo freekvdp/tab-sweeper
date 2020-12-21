@@ -1,4 +1,4 @@
-function sweepSuccess(sweepCount) {
+function sweepSuccessMsg(sweepCount) {
     const notificationOptions = {
         type: 'basic',
         message: `successfully swept ${sweepCount} tabs`,
@@ -8,7 +8,7 @@ function sweepSuccess(sweepCount) {
     browser.notifications.create(notificationOptions);
 }
 
-function sweepError(error) {
+function sweepErrorMsg(error) {
     console.error(error);
     const notificationOptions = {
         type: 'basic',

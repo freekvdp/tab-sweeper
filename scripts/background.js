@@ -1,14 +1,21 @@
-document.addEventListener("DOMContentLoaded", setInitialBadgeNumber);
+document.addEventListener("DOMContentLoaded", setBadgeNumber);
+browser.windows.onFocusChanged.addListener(setBadgeNumber);
+browser.tabs.onActivated.addListener(setBadgeNumber);
+browser.tabs.onUpdated.addListener(setBadgeNumber);
+browser.tabs.onRemoved.addListener(setBadgeNumber);
 
-function setInitialBadgeNumber() {
+function setBadgeNumber() {
     browser.storage.local.get()
-        .then(({ sweepTabUrls, currentWindowActive }) => {
+        .then(({ sweepTabUrls, currentWindowChecked }) => {
+            console.log(sweepTabUrls);
             const filteredPatterns = sweepTabUrls
-                .filter(url => !!url.active)
-                .map(url => url.pattern);
+                ? sweepTabUrls
+                    .filter(url => !!url.active)
+                    .map(url => url.pattern)
+                : [];
 
-            let query = { url: patterns };
-            if (currentWindowActive) {
+            let query = { url: filteredPatterns };
+            if (currentWindowChecked) {
                 query = { ...query, currentWindow: true }
             }
             return browser.tabs.query(query);

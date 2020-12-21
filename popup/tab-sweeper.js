@@ -2,54 +2,47 @@ function updateTabUrlsList(tabUrls) {
     /* update html list */
 }
 
-function addSweepTabUrl(url) {
-    const urlMatchPattern = makeMatchPattern(url);
+// listen for currentWindow changes
+document.getElementById('current-window-option').addEventListener('change', (element) => {
+    storeCurrentWindowValue(element.target.checked).then(
+        updateBadge,
+        (e) => console.error('unable to store currentWindowChecked', e)
+    );
+});
 
-    getSweepTabUrls()
-        .then(sweepTabUrls => {
-            sweepTabUrls.push({
-                pattern: urlMatchPattern,
-                active: true
-            })
-            return sweepTabUrls;
-        })
-        .then(storeUpdatedTabUrls)
-        .then(updateTabUrlsList)
-}
-
-function makeMatchPattern(url) {
-    const sliceWww = url.split('www').pop();
-    return `*://*.${sliceWww}/*`;
-}
-
-function removeSweepTabUrl(pattern) {
-    getSweepTabUrls()
-        .then(sweepTabUrls => sweepTabUrls.filter(url => url.pattern === pattern))
-        .then(storeUpdatedTabUrls)
-        .then(updateTabUrlsList)
-}
-
-function toggleSweepTabUrl(pattern) {
-    getSweepTabUrls()
-        .then(sweepTabUrls => {
-            tabIndex = sweepTabUrls.findIndex(url => url.pattern === pattern);
-            sweepTabUrls[tabIndex].active = !sweepTabUrls[tabIndex].active;
-            return sweepTabUrls;
-        })
-        .then(storeUpdatedTabUrls)
-        .then(updateTabUrlsList)
-}
-
+// listen for activateSweeper trigger
 document.getElementById('sweep-button').addEventListener('click', activateSweeper);
 
-function activateSweeper() {
-    getWindowTabs()
-        .then(tabs => tabs.map(tab => tab.id))
-        .then(tabIds => closeTabs(tabIds))
-        .then(sweepSuccess, sweepError);
+
+function setCurrentWindowOption() {
+    getCurrentWindowValue()
+        .then(optionValue => {
+            document.getElementById('current-window-option').checked = optionValue;
+        });
 }
 
-function closeTabs(tabIds) {
-    browser.tabs.remove(tabIds);
-    return tabIds.length;
+function makeSweepTabOption(label, active, index) {
+    console.log(label, active);
+    return `
+        <span>
+            <input type="checkbox" id="${index}" checked="${active}">
+            <label for="${index}">${label}</label>
+        </span>
+        </br>
+    `
 }
+
+function setSweepTabOptions() {
+    var wrapper = document.getElementById("sweep-tab-options-wrapper");
+
+    let optionList = '';
+
+    getSweepTabUrls()
+        .then(sweepTabs => sweepTabs.map((sweepTab, i) => makeSweepTabOption(sweepTab.pattern, sweepTab.active, i)))
+        .then(options => options.forEach(option => optionList += option))
+        .then(_ => wrapper.innerHTML = optionList)
+}
+
+// set initial window values
+setCurrentWindowOption();
+setSweepTabOptions();

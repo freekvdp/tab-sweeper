@@ -1,46 +1,37 @@
-document.getElementById('current-window-option').addEventListener('change', (element) => {
-    storeCurrentWindowValue(element.target.checked).then(
-        updateBadge,
-        (e) => console.error('unable to store currentWindowChecked', e)
-    );
-});
+function getSweepTabs() {
+    const sweepTabPatterns = getSweepTabUrls()
+        .then(urls => urls
+            .filter(url => !!url.active)
+            .map(url => url.pattern)
+        );
 
-setCurrentWindowOption().then(updateBadge);  // set initial currentWindowValue
-
-function setCurrentWindowOption() {
-    getCurrentWindowValue()
-        .then(optionValue => {
-            document.getElementById('current-window-option').checked = optionValue;
+    return Promise.all([sweepTabPatterns, getCurrentWindowValue()])
+        .then(([sweepTabUrls, currentWindowActive]) => {
+            let query = { url: sweepTabUrls }
+            if (currentWindowActive) {
+                query = { ...query, currentWindow: true }
+            }
+            return browser.tabs.query(query);
         });
 }
 
+function activateSweeper() {
+    getSweepTabs()
+        .then(tabs => tabs.map(tab => tab.id))
+        .then(tabIds => closeTabs(tabIds))
+        .then(sweepSuccessMsg, sweepErrorMsg);
+}
+
+function closeTabs(tabIds) {
+    browser.tabs.remove(tabIds);
+    return tabIds.length;
+}
+
 function updateBadge() {
-    getWindowTabs()
+    getSweepTabs()
         .then(tabs => tabs.length)
         .then(tabCount => {
             const badgeText = tabCount > 0 ? tabCount.toString() : '';
             browser.browserAction.setBadgeText({ text: badgeText });
         })
 }
-
-function getWindowTabs() {
-    const sweepTabPatterns = getSweepTabUrls()
-        .then(urls => urls.map(url => url.pattern))
-
-    return Promise.all([getSweepTabUrls(), getCurrentWindowValue()])
-        .then(([queryTabUrls, currentWindowActive]) => {
-            let queryObj = { url: queryTabUrls }
-            if (currentWindowActive) {
-                queryObj = { ...queryObj, currentWindow: true }
-            }
-            return browser.tabs.query(queryObj);
-        })
-}
-
-browser.tabs.onActivated.addListener(updateBadge);
-browser.tabs.onUpdated.addListener(updateBadge);
-browser.tabs.onRemoved.addListener(updateBadge);
-browser.windows.onFocusChanged.addListener((windowId) => {
-    console.log("Newly focused window: " + windowId);
-});
-browser.windows.onFocusChanged.addListener(updateBadge);

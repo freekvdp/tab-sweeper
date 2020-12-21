@@ -9,19 +9,9 @@ function storeCurrentWindowValue(value) {
 
 function getSweepTabUrls() {
     return browser.storage.local.get({ sweepTabUrls: [] })
-        .then(value => value.sweepTabUrls)
-        .then(_ => [ // temporary
-            {
-                pattern: '*://*.google.com/*',
-                active: true
-            }, {
-                pattern: '*://*.stackoverflow.com/*',
-                active: true
-            }
-        ]
-        )
+        .then(value => value.sweepTabUrls);
 }
 
-function storeUpdatedTabUrls(urls) {
+function storeSweepTabs(urls) {
     return browser.storage.local.set({ sweepTabUrls: urls })
 }

@@ -12,7 +12,7 @@
         <h1 id="popup-header">
             Tab Sweeper
         </h1>
-        <div id="sweeping-urls">
+        <div id="sweep-tab-options-wrapper">
 
         </div>
         <div id="actions-wrapper">
@@ -37,7 +37,9 @@
         #popup-content {
             display: flex;
             flex-direction: column;
-            align-content: center;
+            /* align-content: center; */
+            border:1px solid yellow;
+            height: 100%;
         }
 
         #popup-header {
@@ -45,16 +47,21 @@
             text-align: center;
         }
 
-        #actions-wrapper {}
+        #actions-wrapper {
+            border:1px solid white;
+            justify-self: flex-end;
+        }
 
         #actions-wrapper h2 {
             font-size: 1rem;
         }
     </style>
 
-    <script src="tab-sweeper.js"></script>
     <script src="../scripts/main.js"></script>
+    <script src="../scripts/storage.js"></script>
+    <script src="../scripts/url-list.js"></script>
     <script src="../scripts/notifications.js"></script>
+    <script src="tab-sweeper.js"></script>
 </body>
 
 </html>

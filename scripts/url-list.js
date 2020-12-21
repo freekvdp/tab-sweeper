@@ -4,16 +4,18 @@ function addSweepTabUrl(url) {
     getSweepTabUrls()
         .then(sweepTabUrls => {
             sweepTabUrls.push({
+                url,
                 pattern: urlMatchPattern,
                 active: true
             })
             return sweepTabUrls;
         })
-        .then(storeUpdatedTabUrls)
+        .then(storeSweepTabs)
         .then(updateTabUrlsList)
 }
 
 function makeMatchPattern(url) {
+    //TODO make this work good...
     const sliceWww = url.split('www').pop();
     return `*://*.${sliceWww}/*`;
 }
@@ -21,7 +23,7 @@ function makeMatchPattern(url) {
 function removeSweepTabUrl(pattern) {
     getSweepTabUrls()
         .then(sweepTabUrls => sweepTabUrls.filter(url => url.pattern === pattern))
-        .then(storeUpdatedTabUrls)
+        .then(storeSweepTabs)
         .then(updateTabUrlsList)
 }
 
@@ -32,6 +34,6 @@ function toggleSweepTabUrl(pattern) {
             sweepTabUrls[tabIndex].active = !sweepTabUrls[tabIndex].active;
             return sweepTabUrls;
         })
-        .then(storeUpdatedTabUrls)
+        .then(storeSweepTabs)
         .then(updateTabUrlsList)
 }
