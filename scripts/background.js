@@ -6,12 +6,11 @@ browser.tabs.onRemoved.addListener(setBadgeNumber);
 
 function setBadgeNumber() {
     browser.storage.local.get()
-        .then(({ sweepTabUrls, currentWindowChecked }) => {
-            console.log(sweepTabUrls);
-            const filteredPatterns = sweepTabUrls
-                ? sweepTabUrls
-                    .filter(url => !!url.active)
-                    .map(url => url.pattern)
+        .then(({ sweepTabOptions, currentWindowChecked }) => {
+            const filteredPatterns = sweepTabOptions
+                ? sweepTabOptions
+                    .filter(option => !!option.active)
+                    .map(option => option.pattern)
                 : [];
 
             let query = { url: filteredPatterns };

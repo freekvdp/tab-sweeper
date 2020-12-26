@@ -4,7 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <!-- <link rel="stylesheet" href="choose_beast.css"/> -->
+    <link rel="stylesheet" href="slider.css" />
+    <link rel="stylesheet" href="tab-sweeper.css" />
 </head>
 
 <body>
@@ -12,50 +13,23 @@
         <h1 id="popup-header">
             Tab Sweeper
         </h1>
-        <div id="sweep-tab-options-wrapper">
-
-        </div>
-        <div id="actions-wrapper">
-            <label for="current-window-option">Current window only</label>
-            <input id="current-window-option" type="checkbox" />
-            <div id="buttons-container">
-                <button id="sweep-button">Sweep</button>
+        <div id="sweep-tab-options-wrapper" class="wrapper">
+            <div id="sweep-tab-options"></div>
+            <div id="add-option-wrapper">
+                <input type="text" placeholder="url" id="add-option-input" />
+                <input type="button" value="+" id="add-option-button" />
             </div>
         </div>
+        <div id="window-settings" class="wrapper">
+            <label class="switch" id="current-window-switch">
+                <input id="current-window-option" type="checkbox" />
+                <span class="slider round"></span>
+            </label>
+            <label for="current-window-switch">Current window only</label>
+        </div>
+
+        <input type="button" id="sweep-button" value="Sweep" />
     </div>
-
-    <style>
-        body {
-            background: rgb(128, 128, 128);
-            min-width: 200px;
-            min-height: 200px;
-            font-family: Helvetica Verdana, Geneva, Tahoma, sans-serif;
-            font-size: 12px;
-            color: white;
-        }
-
-        #popup-content {
-            display: flex;
-            flex-direction: column;
-            /* align-content: center; */
-            border:1px solid yellow;
-            height: 100%;
-        }
-
-        #popup-header {
-            font-size: 1rem;
-            text-align: center;
-        }
-
-        #actions-wrapper {
-            border:1px solid white;
-            justify-self: flex-end;
-        }
-
-        #actions-wrapper h2 {
-            font-size: 1rem;
-        }
-    </style>
 
     <script src="../scripts/main.js"></script>
     <script src="../scripts/storage.js"></script>

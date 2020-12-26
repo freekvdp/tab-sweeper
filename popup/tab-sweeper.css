@@ -1,0 +1,48 @@
+body {
+    background: rgb(128, 128, 128);
+    min-width: 200px;
+    min-height: 200px;
+    height: 200px;
+    font-family: Helvetica Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 12px;
+    color: white;
+    padding: 0;
+    margin: 0;
+}
+
+#popup-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+#popup-header {
+    font-size: 1rem;
+    text-align: center;
+}
+
+.wrapper {
+    margin: 0 10px;
+}
+
+#sweep-tab-options-wrapper {
+    flex: 1;
+}
+
+#window-settings {
+    padding: 10px 0;
+    border-top: 1px solid rgb(100, 100, 100);
+}
+
+#current-window-switch {
+    margin-right: 5px;
+}
+
+#sweep-button {
+    background: CadetBlue;
+    color: black;
+    width: 100%;
+    height: 30px;
+    text-align: center;
+    border: none;
+}

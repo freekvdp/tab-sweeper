@@ -1,5 +1,5 @@
 function getSweepTabs() {
-    const sweepTabPatterns = getSweepTabUrls()
+    const sweepTabPatterns = getSweepTabOptions()
         .then(urls => urls
             .filter(url => !!url.active)
             .map(url => url.pattern)
