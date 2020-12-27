@@ -1,7 +1,7 @@
 function addSweepTabOption(url) {
     const urlMatchPattern = makeMatchPattern(url);
 
-    getSweepTabOptions()
+    return getSweepTabOptions()
         .then(sweepTabOptions => {
             sweepTabOptions.push({
                 url,
@@ -11,6 +11,7 @@ function addSweepTabOption(url) {
             return sweepTabOptions;
         })
         .then(storeSweepTabOptions)
+        .then(getSweepTabOptions)
         .then(updateSweepTabOptionsList)
 }
 
@@ -24,16 +25,18 @@ function removeSweepTabOption(url) {
     getSweepTabOptions()
         .then(sweepTabOptions => sweepTabOptions.filter(option => option.url === url))
         .then(storeSweepTabOptions)
+        .then(getSweepTabOptions)
         .then(updateSweepTabOptionsList)
 }
 
 function toggleSweepTabOption(url) {
-    getSweepTabOptions()
+    return getSweepTabOptions()
         .then(sweepTabOptions => {
             tabIndex = sweepTabOptions.findIndex(option => option.url === url);
             sweepTabOptions[tabIndex].active = !sweepTabOptions[tabIndex].active;
             return sweepTabOptions;
         })
         .then(storeSweepTabOptions)
+        .then(getSweepTabOptions)
         .then(updateSweepTabOptionsList)
 }
