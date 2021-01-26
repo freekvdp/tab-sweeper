@@ -1,8 +1,8 @@
 body {
     background: rgb(128, 128, 128);
-    min-width: 200px;
-    min-height: 200px;
-    height: 200px;
+    min-width: 230px;
+    /* min-height: 250px; */
+    height: 250px;
     font-family: Helvetica Verdana, Geneva, Tahoma, sans-serif;
     font-size: 12px;
     color: white;
@@ -11,6 +11,8 @@ body {
 }
 
 #popup-content {
+    /* TODO remove width below */
+    width: 230px; 
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -25,10 +27,18 @@ body {
     margin: 0 10px;
 }
 
+/* Sweep tab options */
 #sweep-tab-options-wrapper {
     flex: 1;
 }
 
+#sweep-tab-options {
+    margin-bottom: 5px;
+    max-height: 100px;
+    overflow-y: auto;
+}
+
+/* WINDOW SETTINGS */
 #window-settings {
     padding: 10px 0;
     border-top: 1px solid rgb(100, 100, 100);
@@ -38,6 +48,7 @@ body {
     margin-right: 5px;
 }
 
+/* SWEEP BUTTON */
 #sweep-button {
     background: CadetBlue;
     color: black;
@@ -45,4 +56,113 @@ body {
     height: 30px;
     text-align: center;
     border: none;
+    cursor: pointer;
+}
+
+#sweep-button:hover {
+    color: rgb(30, 30, 30);
+}
+
+#sweep-button:active {
+    background: rgb(78, 129, 131);
+}
+
+/* Trigger Add option button */
+#trigger-add-option {
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+#trigger-add-option::before {
+    content: "+";
+    margin-right: 8px;
+}
+
+#trigger-add-option:hover {
+    color:rgb(221, 221, 221);
+}
+
+#trigger-add-option.hidden {
+    display: none;
+}
+
+/* ADD OPTION */
+#add-option-wrapper {
+    margin: 5px 0 0 5px;
+    display: none;
+}
+
+#add-option-wrapper.show {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+
+#add-option-input {
+    background: #ccc;
+    border: none;
+    height: 18px;
+    padding-left: 5px;
+    outline: none;
+}
+
+#add-option-button {
+    background: transparent;
+    color: rgb(30, 30, 30);
+    padding: 0 5px;
+    height: 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#add-option-button:hover {
+    color: rgb(51, 51, 51);
+    background: cadetblue;   
+}
+
+#add-option-button:active {
+    color: black;
+}
+
+/* TAB OPTION */
+.tab-option-wrapper {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.tab-option-wrapper .tab-option-input {
+    margin-right: 10px;
+}
+
+.tab-option-wrapper .tab-option-label {
+    flex: 1;
+}
+
+/* MESSAGE CONTAINER */
+#message-container {
+    height: 20px;
+    padding: 0 15px;
+}
+
+#error-message {
+    font-style: italic;
+    color:coral;
+}
+
+/* SHARED */
+.close-button {
+    width: 18px;
+    border-radius: 5px;
+    background: transparent;
+    text-align: center;
+}
+
+.close-button:hover {
+    background:rgb(170, 170, 170);
+    cursor: pointer;
+}
+
+.close-button:active {
+    background:rgb(119, 119, 119);
 }

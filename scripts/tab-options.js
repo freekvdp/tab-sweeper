@@ -1,35 +1,57 @@
 function updateSweepTabOptionsList(tabOptions) {
     var wrapper = document.getElementById("sweep-tab-options");
+    var optionsList = '';
 
-    optionsList = tabOptions
-        .map((sweepTab, i) => makeSweepTabOption(sweepTab.url, sweepTab.active, i))
-        .reduce((options = '', option) => options + option);
+    if (tabOptions.length > 0) {
+        optionsList = tabOptions
+            .map((sweepTab, i) => makeSweepTabOption(sweepTab.url, sweepTab.active, i))
+            .reduce((options = '', option) => options + option);
+    }
 
     wrapper.innerHTML = optionsList;
     makeTabOptionChangeListeners();
+    makeRemoveOptionClickListeners();
+    updateBadge();
 }
 
 function addTabSweeperOption() {
     const newOptionEl = document.getElementById('add-option-input');
-    console.log('add', newOptionEl.value);
-    addSweepTabOption(newOptionEl.value)
+
+    return addSweepTabOption(newOptionEl.value)
+        .catch(e => raiseError(e))
         .then(updateBadge)
         .then(_ => newOptionEl.value = '');
-    // removeSweepTabOption('www.google.com')
 }
 
 function makeSweepTabOption(label, active, index) {
     return `
-        <span>
-            <input type="checkbox" class="tab-option" name="${label}" id="${index}" ${active ? 'checked' : null}>
-            <label for="${index}">${label}</label>
+        <span class="tab-option-wrapper">
+            <input type="checkbox" class="tab-option-input" name="${label}" id="${index}" ${active ? 'checked' : null}>
+            <label class="tab-option-label" for="${index}">${label}</label>
+            <a class="tab-option-remove close-button" name="${label}"> &#215; </a>
         </span>
-        </br>
     `
 }
 
+function makeRemoveOptionClickListeners() {
+    var tabOptions = document.getElementsByClassName('tab-option-remove');
+    console.log(tabOptions);
+
+    // listen for toggle tab-option activity
+    for (var i = 0; i < tabOptions.length; i++) {
+        console.log(tabOptions[i]);
+        tabOptions[i].addEventListener('click', removeTabOption);
+    }
+}
+
+function removeTabOption(e) {
+    console.log(e.target.name);
+    removeSweepTabOption(e.target.name)
+        .then(e => console.log(e));
+}
+
 function makeTabOptionChangeListeners() {
-    var tabOptions = document.getElementsByClassName('tab-option');
+    var tabOptions = document.getElementsByClassName('tab-option-input');
 
     // listen for toggle tab-option activity
     for (var i = 0; i < tabOptions.length; i++) {

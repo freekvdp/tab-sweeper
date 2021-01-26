@@ -13,6 +13,5 @@ function getSweepTabOptions() {
 }
 
 function storeSweepTabOptions(tabOptions) {
-    console.log('storeTabs');
-    return browser.storage.local.set({ sweepTabOptions: tabOptions })
+    return browser.storage.local.set({ sweepTabOptions: tabOptions });
 }

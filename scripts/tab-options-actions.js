@@ -1,29 +1,47 @@
 function addSweepTabOption(url) {
-    const urlMatchPattern = makeMatchPattern(url);
+    const cleanUrl = sanitizeUrl(url);
 
-    return getSweepTabOptions()
-        .then(sweepTabOptions => {
-            sweepTabOptions.push({
-                url,
-                pattern: urlMatchPattern,
-                active: true
+    if (cleanUrl) {
+        const urlMatchPattern = makeMatchPattern(cleanUrl);
+
+        return getSweepTabOptions()
+            .then(sweepTabOptions => {
+                sweepTabOptions.push({
+                    url,
+                    pattern: urlMatchPattern,
+                    active: true
+                })
+                return sweepTabOptions;
             })
-            return sweepTabOptions;
-        })
-        .then(storeSweepTabOptions)
-        .then(getSweepTabOptions)
-        .then(updateSweepTabOptionsList)
+            .then(storeSweepTabOptions)
+            .then(getSweepTabOptions)
+            .then(updateSweepTabOptionsList)
+    } else {
+        return Promise.reject('value is not a valid url...');
+    }
+}
+
+function sanitizeUrl(url) {
+    if (url.trim() === '') {
+        return undefined;
+    }
+    if (!url.includes('.')) {
+        return undefined;
+    }
+    return url.trim();
 }
 
 function makeMatchPattern(url) {
+    console.log(url);
     //TODO make this work good...
-    const sliceWww = url.split('www').pop();
-    return `*://*.${sliceWww}/*`;
+    // const sliceWww = url.split('www.').pop();
+    // console.log('slice', sliceWww);
+    return `*://*.${url}/*`;
 }
 
 function removeSweepTabOption(url) {
-    getSweepTabOptions()
-        .then(sweepTabOptions => sweepTabOptions.filter(option => option.url === url))
+    return getSweepTabOptions()
+        .then(sweepTabOptions => sweepTabOptions.filter(option => option.url !== url))
         .then(storeSweepTabOptions)
         .then(getSweepTabOptions)
         .then(updateSweepTabOptionsList)

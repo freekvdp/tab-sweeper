@@ -18,3 +18,9 @@ function sweepErrorMsg(error) {
     };
     browser.notifications.create(notificationOptions);
 }
+
+function raiseError(msg) {
+    showErrorMessage(msg);
+    setTimeout(hideErrorMessage, 3000);
+    return Promise.reject(msg);
+}

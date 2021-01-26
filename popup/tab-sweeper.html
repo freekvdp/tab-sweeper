@@ -15,11 +15,18 @@
         </h1>
         <div id="sweep-tab-options-wrapper" class="wrapper">
             <div id="sweep-tab-options"></div>
+            <span id="trigger-add-option">add url</span>
             <div id="add-option-wrapper">
-                <input type="text" placeholder="url" id="add-option-input" />
-                <input type="button" value="+" id="add-option-button" />
+                <input type="text" placeholder="url to clear" id="add-option-input" autofocus />
+                <input type="button" value="add" id="add-option-button" />
+                <a class="close-button" id="add-option-close"> &#215; </a>
             </div>
         </div>
+
+        <div id="message-container">
+            <span id="error-message"></span>
+        </div>
+
         <div id="window-settings" class="wrapper">
             <label class="switch" id="current-window-switch">
                 <input id="current-window-option" type="checkbox" />
