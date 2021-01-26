@@ -35,19 +35,15 @@ function makeSweepTabOption(label, active, index) {
 
 function makeRemoveOptionClickListeners() {
     var tabOptions = document.getElementsByClassName('tab-option-remove');
-    console.log(tabOptions);
 
     // listen for toggle tab-option activity
     for (var i = 0; i < tabOptions.length; i++) {
-        console.log(tabOptions[i]);
         tabOptions[i].addEventListener('click', removeTabOption);
     }
 }
 
 function removeTabOption(e) {
-    console.log(e.target.name);
     removeSweepTabOption(e.target.name)
-        .then(e => console.log(e));
 }
 
 function makeTabOptionChangeListeners() {

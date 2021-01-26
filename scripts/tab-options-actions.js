@@ -32,10 +32,8 @@ function sanitizeUrl(url) {
 }
 
 function makeMatchPattern(url) {
-    console.log(url);
     //TODO make this work good...
     // const sliceWww = url.split('www.').pop();
-    // console.log('slice', sliceWww);
     return `*://*.${url}/*`;
 }
 
