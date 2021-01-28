@@ -1,0 +1,50 @@
+<div class="overlay-container">
+    <h1 id="header">
+        Thank you for being here!
+    </h1>
+    <span>
+        <p class="donation-message">
+            This free browser extension has been made by an indie developer: <a href="#">me :)</a>
+        </p>
+        <p class="donation-message">I became a software developer to create software for people like you <i>&#9829;</i>,
+            so thank you for using this extension!</p>
+        <p class="donation-message"> If you decide to donate, you can do so by scanning or clicking the code below.
+            it will make me take a little jump for joy!</p>
+    </span>
+    <div class="donate-container">
+        <img id="donation-qr" src="../assets/donation_qr.png" />
+    </div>
+</div>
+
+<style>
+    .overlay-container {
+        font-family: Helvetica Verdana, Geneva, Tahoma, sans-serif;
+        display: flex;
+        flex-direction: column;
+        color: white;
+        padding: 5px 5px 0 5px;
+        font-size: 10px;
+        align-items: center;
+    }
+    
+    #header {
+        font-size: .8rem;
+        text-align: center;
+        padding: 0;
+        margin: 0 0 5px 0;
+    }
+    
+    #donation-message {
+        padding: 0;
+        margin: 0 0 5px 0;
+    }
+    
+    #donation-qr {
+        margin-top: 5px;
+        width: 90px;
+        height: 90px;
+        cursor: pointer;
+    }
+</style>
+
+<script src="./donate.js"></script>

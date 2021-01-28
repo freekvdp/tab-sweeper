@@ -16,8 +16,8 @@
         <div id="sweep-tab-options-wrapper" class="wrapper">
             <div id="sweep-tab-options"></div>
             <span id="trigger-add-option">add url</span>
-            <div id="add-option-wrapper">
-                <input type="text" placeholder="url to clear" id="add-option-input" autofocus />
+            <div id="add-option-wrapper" class="hidden">
+                <input type="text" placeholder="url to sweep" id="add-option-input" autofocus />
                 <input type="button" value="add" id="add-option-button" />
                 <a class="close-button" id="add-option-close"> &#215; </a>
             </div>
@@ -28,14 +28,22 @@
         </div>
 
         <div id="window-settings" class="wrapper">
-            <label class="switch" id="current-window-switch">
-                <input id="current-window-option" type="checkbox" />
-                <span class="slider round"></span>
+            <span>
+                <label class="switch" id="current-window-switch">
+                    <input id="current-window-option" type="checkbox" />
+                    <span class="slider round"></span>
             </label>
             <label for="current-window-switch" id="current-window-option-label"></label>
+            </span>
+            <a id="donate-button">
+                <img id="heart-icon" src="../assets/heart_8bit_white.png" />
+            </a>
         </div>
 
         <input type="button" id="sweep-button" value="Sweep" />
+    </div>
+    <div id="donation-overlay" class="hidden">
+        <iframe id="donation-iframe" src="../donation-overlay/donate.html"></iframe>
     </div>
 
     <script src="../scripts/tab-options.js"></script>

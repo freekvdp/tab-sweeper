@@ -2,7 +2,7 @@ body {
     background: rgb(128, 128, 128);
     min-width: 230px;
     /* min-height: 250px; */
-    height: 250px;
+    height: 300px;
     font-family: Helvetica Verdana, Geneva, Tahoma, sans-serif;
     font-size: 12px;
     color: white;
@@ -12,7 +12,7 @@ body {
 
 #popup-content {
     /* TODO remove width below */
-    width: 230px; 
+    width: 230px;
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -23,11 +23,9 @@ body {
     text-align: center;
 }
 
-.wrapper {
-    margin: 0 10px;
-}
 
 /* Sweep tab options */
+
 #sweep-tab-options-wrapper {
     flex: 1;
 }
@@ -38,17 +36,23 @@ body {
     overflow-y: auto;
 }
 
+
 /* WINDOW SETTINGS */
+
 #window-settings {
     padding: 10px 0;
     border-top: 1px solid rgb(100, 100, 100);
+    display: flex;
+    justify-content: space-between;
 }
 
 #current-window-switch {
     margin-right: 5px;
 }
 
+
 /* SWEEP BUTTON */
+
 #sweep-button {
     background: CadetBlue;
     color: black;
@@ -67,7 +71,9 @@ body {
     background: rgb(78, 129, 131);
 }
 
+
 /* Trigger Add option button */
+
 #trigger-add-option {
     cursor: pointer;
     margin-left: 10px;
@@ -79,20 +85,14 @@ body {
 }
 
 #trigger-add-option:hover {
-    color:rgb(221, 221, 221);
+    color: rgb(221, 221, 221);
 }
 
-#trigger-add-option.hidden {
-    display: none;
-}
 
 /* ADD OPTION */
+
 #add-option-wrapper {
     margin: 5px 0 0 5px;
-    display: none;
-}
-
-#add-option-wrapper.show {
     display: flex;
     flex-wrap: nowrap;
     justify-content: space-between;
@@ -118,14 +118,16 @@ body {
 
 #add-option-button:hover {
     color: rgb(51, 51, 51);
-    background: cadetblue;   
+    background: cadetblue;
 }
 
 #add-option-button:active {
     color: black;
 }
 
+
 /* TAB OPTION */
+
 .tab-option-wrapper {
     display: flex;
     flex-wrap: nowrap;
@@ -139,7 +141,9 @@ body {
     flex: 1;
 }
 
+
 /* MESSAGE CONTAINER */
+
 #message-container {
     height: 20px;
     padding: 0 15px;
@@ -147,10 +151,50 @@ body {
 
 #error-message {
     font-style: italic;
-    color:coral;
+    color: coral;
 }
 
+
+/* DONATION BUTTON */
+
+#donate-button {
+    cursor: pointer;
+}
+
+#heart-icon {
+    width: 14px;
+    height: 14px;
+    transition: transform .5s;
+}
+
+#heart-icon:hover {
+    transform: scale(1.3);
+}
+
+
+/* DONATION OVERLAY */
+
+#donation-overlay {
+    background: rgb(128, 128, 128);
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 230px;
+    height: 300px;
+    overflow: hidden;
+}
+
+#donation-iframe {
+    border: none;
+    padding: none;
+    background: transparent;
+    width: 230px;
+    height: 300px;
+}
+
+
 /* SHARED */
+
 .close-button {
     width: 18px;
     border-radius: 5px;
@@ -159,10 +203,18 @@ body {
 }
 
 .close-button:hover {
-    background:rgb(170, 170, 170);
+    background: rgb(170, 170, 170);
     cursor: pointer;
 }
 
 .close-button:active {
-    background:rgb(119, 119, 119);
+    background: rgb(119, 119, 119);
+}
+
+.hidden {
+    display: none;
+}
+
+.wrapper {
+    margin: 0 10px;
 }

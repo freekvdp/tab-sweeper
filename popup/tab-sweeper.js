@@ -5,7 +5,7 @@ currentWindowOptionEl.addEventListener('change', (element) => {
     storeCurrentWindowValue(element.target.checked)
         .then(
             updateBadge,
-            (e) => console.error('unable to store currentWindowChecked', e)
+            _ => raiseError('unable to store currentWindowChecked')
         )
         .then(setCurrentWindowOptionLabel);
 });
@@ -34,12 +34,12 @@ document.getElementById('trigger-add-option').addEventListener('click', showTabS
 
 function showTabSweeperOption() {
     document.getElementById('trigger-add-option').classList.add("hidden");
-    document.getElementById('add-option-wrapper').classList.add("show");
+    document.getElementById('add-option-wrapper').classList.remove("hidden");
 }
 
 function hideTabSweeperOption() {
     document.getElementById('trigger-add-option').classList.remove("hidden");
-    document.getElementById('add-option-wrapper').classList.remove("show");
+    document.getElementById('add-option-wrapper').classList.add("hidden");
 }
 
 // listen for add-option button
@@ -65,6 +65,19 @@ function hideErrorMessage() {
 function setSweepTabOptions() {
     getSweepTabOptions()
         .then(updateSweepTabOptionsList);
+}
+
+// donation overlay
+document.getElementById('donate-button').addEventListener('click', function() {
+    triggerDonationOverlay(true);
+})
+
+function triggerDonationOverlay(show) {
+    if (show) {
+        document.getElementById('donation-overlay').classList.remove("hidden");
+    } else {
+        document.getElementById('donation-overlay').classList.add("hidden");
+    }
 }
 
 // set initial window values
