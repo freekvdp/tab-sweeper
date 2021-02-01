@@ -1,17 +1,16 @@
-function updateSweepTabOptionsList(tabOptions) {
+async function updateSweepTabOptionsList(tabOptions) {
     var wrapper = document.getElementById("sweep-tab-options");
     var optionsList = '';
 
     if (tabOptions.length > 0) {
         optionsList = tabOptions
-            .map((sweepTab, i) => makeSweepTabOption(sweepTab.url, sweepTab.active, i))
+            .map((sweepTab, i) => makeSweepTabOption(sweepTab.url, sweepTab.count, sweepTab.active, i))
             .reduce((options = '', option) => options + option);
     }
 
     wrapper.innerHTML = optionsList;
     makeTabOptionChangeListeners();
     makeRemoveOptionClickListeners();
-    updateBadge();
 }
 
 function addTabSweeperOption() {
@@ -23,11 +22,12 @@ function addTabSweeperOption() {
         .then(_ => newOptionEl.value = '');
 }
 
-function makeSweepTabOption(label, active, index) {
+function makeSweepTabOption(label, count, active, index) {
     return `
         <span class="tab-option-wrapper">
             <input type="checkbox" class="tab-option-input" name="${label}" id="${index}" ${active ? 'checked' : null}>
             <label class="tab-option-label" for="${index}">${label}</label>
+            <span>(${count})</span>
             <a class="tab-option-remove close-button" name="${label}"> &#215; </a>
         </span>
     `

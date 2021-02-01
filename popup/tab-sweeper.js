@@ -7,7 +7,9 @@ currentWindowOptionEl.addEventListener('change', (element) => {
             updateBadge,
             _ => raiseError('unable to store currentWindowChecked')
         )
-        .then(setCurrentWindowOptionLabel);
+        .then(setCurrentWindowOptionLabel)
+        // .then(getSweepTabsWithCount)
+        // .then(updateSweepTabOptionsList);
 });
 
 function setCurrentWindowOptionLabel() {
@@ -43,14 +45,14 @@ function hideTabSweeperOption() {
 }
 
 // listen for add-option button
-document.getElementById('add-option-button').addEventListener('click', function () {
+document.getElementById('add-option-button').addEventListener('click', function() {
     addTabSweeperOption()
         .then(hideTabSweeperOption);
 });
 
 // listen for add-option-close button
-document.getElementById('add-option-close').addEventListener('click', function () {
-    hideTabSweeperOption();  
+document.getElementById('add-option-close').addEventListener('click', function() {
+    hideTabSweeperOption();
 })
 
 // show error
@@ -62,9 +64,9 @@ function hideErrorMessage() {
     document.getElementById('error-message').innerHTML = '';
 }
 
-function setSweepTabOptions() {
-    getSweepTabOptions()
-        .then(updateSweepTabOptionsList);
+function setSweepTabOptionsList() {
+    getSweepTabsWithCount()
+        .then(({ tabOptions }) => updateSweepTabOptionsList(tabOptions))
 }
 
 // donation overlay
@@ -82,4 +84,4 @@ function triggerDonationOverlay(show) {
 
 // set initial window values
 setCurrentWindowOption();
-setSweepTabOptions();
+setSweepTabOptionsList();

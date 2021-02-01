@@ -14,8 +14,7 @@ function addSweepTabOption(url) {
                 return sweepTabOptions;
             })
             .then(storeSweepTabOptions)
-            .then(getSweepTabOptions)
-            .then(updateSweepTabOptionsList)
+            .then(updateBadge)
     } else {
         return Promise.reject('value is not a valid url...');
     }
@@ -41,8 +40,7 @@ function removeSweepTabOption(url) {
     return getSweepTabOptions()
         .then(sweepTabOptions => sweepTabOptions.filter(option => option.url !== url))
         .then(storeSweepTabOptions)
-        .then(getSweepTabOptions)
-        .then(updateSweepTabOptionsList)
+        .then(updateBadge);
 }
 
 function toggleSweepTabOption(url) {
@@ -53,6 +51,5 @@ function toggleSweepTabOption(url) {
             return sweepTabOptions;
         })
         .then(storeSweepTabOptions)
-        .then(getSweepTabOptions)
-        .then(updateSweepTabOptionsList)
+        .then(updateBadge);
 }
