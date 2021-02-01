@@ -3,7 +3,8 @@ function sweepSuccessMsg(sweepCount) {
         type: 'basic',
         message: `successfully swept ${sweepCount} tabs`,
         title: 'No problemo!',
-        iconUrl: 'icons/magic-sweeper-64.png'
+        iconUrl: 'icons/magic-sweeper-64.png',
+        eventTime: 2000,
     };
     browser.notifications.create(notificationOptions);
 }
@@ -14,7 +15,8 @@ function sweepErrorMsg(error) {
         type: 'basic',
         message: `Something went terribly wrong 😕. You'll have to sweep by hand 😬`,
         title: 'Oops...',
-        iconUrl: 'icons/magic-sweeper-64.png'
+        iconUrl: 'icons/magic-sweeper-64.png',
+        eventTime: 2000,
     };
     browser.notifications.create(notificationOptions);
 }
