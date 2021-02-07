@@ -7,15 +7,14 @@ browser.tabs.onRemoved.addListener(setBadgeNumber);
 function setBadgeNumber() {
     browser.storage.local.get()
         .then(({ sweepTabOptions, currentWindowChecked }) => {
-            const filteredPatterns = sweepTabOptions
-                ? sweepTabOptions
-                    .filter(option => !!option.active)
-                    .map(option => option.pattern)
-                : [];
+            const filteredPatterns = sweepTabOptions ?
+                sweepTabOptions
+                .filter(option => !!option.active)
+                .map(option => option.pattern) : [];
 
             let query = { url: filteredPatterns };
             if (currentWindowChecked) {
-                query = { ...query, currentWindow: true }
+                query = {...query, currentWindow: true }
             }
             return browser.tabs.query(query);
         })
@@ -23,5 +22,7 @@ function setBadgeNumber() {
         .then(tabCount => {
             const badgeText = tabCount > 0 ? tabCount.toString() : '';
             browser.browserAction.setBadgeText({ text: badgeText });
+            browser.browserAction.setBadgeBackgroundColor({ color: "rgb(127, 238, 241)" });
+            browser.browserAction.setBadgeTextColor({ color: "rgb(43, 43, 65)" });
         })
 }

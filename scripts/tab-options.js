@@ -25,8 +25,11 @@ function addTabSweeperOption() {
 function makeSweepTabOption(label, count, active, index) {
     return `
         <span class="tab-option-wrapper">
-            <input type="checkbox" class="tab-option-input" name="${label}" id="${index}" ${active ? 'checked' : null}>
-            <label class="tab-option-label" for="${index}">${label}</label>
+            <label class="tab-option">
+                <input type="checkbox" class="tab-option-input" id="${index}" name="${label}" ${active ? 'checked' : null}>
+                <span class="tab-option-checked">&#8226;</span>
+                ${label}
+            </label>
             <span>(${count})</span>
             <a class="tab-option-remove close-button" name="${label}"> &#215; </a>
         </span>

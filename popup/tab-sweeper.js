@@ -8,8 +8,6 @@ currentWindowOptionEl.addEventListener('change', (element) => {
             _ => raiseError('unable to store currentWindowChecked')
         )
         .then(setCurrentWindowOptionLabel)
-        // .then(getSweepTabsWithCount)
-        // .then(updateSweepTabOptionsList);
 });
 
 function setCurrentWindowOptionLabel() {

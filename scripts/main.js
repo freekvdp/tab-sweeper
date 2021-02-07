@@ -21,12 +21,16 @@ function getSweepTabsWithCount() {
             let tabCount = 0;
             const optionsWithCount = options.map(option => {
                 let query = { url: option.pattern }
+
                 if (currentWindowActive) {
                     query = {...query, currentWindow: true }
                 }
+
                 return browser.tabs.query(query)
                     .then(tabs => {
-                        tabCount += tabs.length;
+                        if (option.active) {
+                            tabCount += tabs.length;
+                        }
                         return {...option, count: tabs.length };
                     })
             })
@@ -41,6 +45,7 @@ function activateSweeper() {
         .then(tabs => tabs.map(tab => tab.id))
         .then(tabIds => closeTabs(tabIds))
         .then(sweepSuccessMsg, sweepErrorMsg)
+        .then(() => window.close())
 }
 
 function closeTabs(tabIds) {
@@ -53,7 +58,6 @@ function updateBadge() {
         .then(({ tabOptions, tabCount }) => {
             const badgeText = tabCount > 0 ? tabCount.toString() : '';
             browser.browserAction.setBadgeText({ text: badgeText });
-            console.log('lala', tabOptions);
             return tabOptions
         })
         .then(updateSweepTabOptionsList)
