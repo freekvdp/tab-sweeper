@@ -1,57 +1,79 @@
 <!DOCTYPE html>
 
 <html>
+  <head>
+    <meta charset="utf-8" />
+    <script
+      type="application/javascript"
+      src="../browser-polyfill/browser-polyfill.min.js"
+    ></script>
 
-<head>
-    <meta charset="utf-8">
+    <script
+      type="application/javascript"
+      src="../scripts/tab-options.js"
+    ></script>
+    <script
+      type="application/javascript"
+      src="../scripts/tab-options-actions.js"
+    ></script>
+    <script type="application/javascript" src="../scripts/main.js"></script>
+    <script type="application/javascript" src="../scripts/storage.js"></script>
+    <script
+      type="application/javascript"
+      src="../scripts/notifications.js"
+    ></script>
+
     <link rel="stylesheet" href="slider.css" />
     <link rel="stylesheet" href="tab-sweeper.css" />
-</head>
+  </head>
 
-<body>
+  <body>
     <div id="popup-content">
-        <h1 id="popup-header">
-            Tab Sweeper
-        </h1>
-        <div id="sweep-tab-options-wrapper" class="wrapper">
-            <div id="sweep-tab-options"></div>
-            <span id="trigger-add-option">add url</span>
-            <div id="add-option-wrapper" class="hidden">
-                <input type="text" placeholder="www.url-to-sweep.ts" id="add-option-input" autofocus />
-                <input type="button" value="add" id="add-option-button" />
-                <a class="close-button" id="add-option-close"> &#215; </a>
-            </div>
+      <h1 id="popup-header">Tab Sweeper</h1>
+      <div id="sweep-tab-options-wrapper" class="wrapper">
+        <div id="sweep-tab-options"></div>
+        <span id="trigger-add-option">add url</span>
+        <div id="add-option-wrapper" class="hidden">
+          <input
+            type="text"
+            placeholder="www.url-to-sweep.ts"
+            id="add-option-input"
+            autofocus
+          />
+          <input type="button" value="add" id="add-option-button" />
+          <a class="close-button" id="add-option-close"> &#215; </a>
         </div>
+      </div>
 
-        <div id="message-container">
-            <span id="error-message"></span>
-        </div>
+      <div id="message-container">
+        <span id="error-message"></span>
+      </div>
 
-        <div id="window-settings" class="wrapper">
-            <span>
-                <label class="switch" id="current-window-switch">
-                    <input id="current-window-option" type="checkbox" />
-                    <span class="slider round"></span>
-            </label>
-            <label for="current-window-switch" id="current-window-option-label"></label>
-            </span>
-            <a id="donate-button">
-                <img id="heart-icon" src="../assets/heart_8bit_white.png" />
-            </a>
-        </div>
+      <div id="window-settings" class="wrapper">
+        <span>
+          <label class="switch" id="current-window-switch">
+            <input id="current-window-option" type="checkbox" />
+            <span class="slider round"></span>
+          </label>
+          <label
+            for="current-window-switch"
+            id="current-window-option-label"
+          ></label>
+        </span>
+        <a id="donate-button">
+          <img id="heart-icon" src="../assets/heart_8bit_white.png" />
+        </a>
+      </div>
 
-        <input type="button" id="sweep-button" value="Sweep" />
+      <input type="button" id="sweep-button" value="Sweep" />
     </div>
     <div id="donation-overlay" class="hidden">
-        <iframe id="donation-iframe" src="./donation-overlay/donate.html"></iframe>
+      <iframe
+        id="donation-iframe"
+        src="./donation-overlay/donate.html"
+      ></iframe>
     </div>
 
-    <script src="../scripts/tab-options.js"></script>
-    <script src="../scripts/tab-options-actions.js"></script>
-    <script src="../scripts/main.js"></script>
-    <script src="../scripts/storage.js"></script>
-    <script src="../scripts/notifications.js"></script>
-    <script src="tab-sweeper.js"></script>
-</body>
-
+    <script type="application/javascript" src="tab-sweeper.js"></script>
+  </body>
 </html>
